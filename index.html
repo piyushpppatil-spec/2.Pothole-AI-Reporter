@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pothole AI Reporter | Smart Civic Action</title>
+    <meta name="description" content="Report potholes automatically using AI. Get severity ratings, repair costs, and an official complaint letter ready to send.">
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="bg-shape shape-1"></div>
+    <div class="bg-shape shape-2"></div>
+    
+    <div class="container">
+        <header>
+            <h1>Pothole <span class="highlight">AI</span> Reporter</h1>
+            <p>Empowering citizens with AI to demand safer roads. Report, Analyze, and Act.</p>
+        </header>
+
+        <main>
+            <div class="card form-container">
+                <h2>Report a Pothole</h2>
+                <form id="pothole-form">
+                    <div class="form-group location-group">
+                        <label for="location">Location / Landmark</label>
+                        <div class="location-input-wrapper">
+                            <input type="text" id="location" name="location" placeholder="e.g., Near City Hospital, MG Road" required>
+                            <button type="button" id="geo-btn" class="icon-btn" title="Get Current Location">📍</button>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label for="roadType">Road Type</label>
+                            <select id="roadType" name="roadType" required>
+                                <option value="" disabled selected>Select Road Type</option>
+                                <option value="Highway">Highway</option>
+                                <option value="Main City Road">Main City Road</option>
+                                <option value="Residential Street">Residential Street</option>
+                                <option value="Service Lane">Service Lane</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="size">Estimated Size</label>
+                            <select id="size" name="size" required>
+                                <option value="" disabled selected>Select Size</option>
+                                <option value="Small (< 1 ft)">Small (< 1 ft wide)</option>
+                                <option value="Medium (1-3 ft)">Medium (1-3 ft wide)</option>
+                                <option value="Large (3-5 ft)">Large (3-5 ft wide)</option>
+                                <option value="Massive Crater (> 5 ft)">Massive Crater (> 5 ft wide)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="depth">Estimated Depth</label>
+                        <select id="depth" name="depth" required>
+                            <option value="" disabled selected>Select Depth</option>
+                            <option value="Shallow (< 2 inches)">Shallow (< 2 inches)</option>
+                            <option value="Moderate (2-5 inches)">Moderate (2-5 inches)</option>
+                            <option value="Deep (> 5 inches)">Deep (> 5 inches - High Risk)</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="description">Additional Description</label>
+                        <textarea id="description" name="description" rows="3" placeholder="Describe any specific dangers, e.g., 'Fills with water during rain, invisible to bikers at night.'"></textarea>
+                    </div>
+
+                    <div class="form-group file-upload">
+                        <label for="photo">Upload Photo (Optional)</label>
+                        <input type="file" id="photo" name="photo" accept="image/*">
+                        <small>Upload a photo of the pothole. The AI will analyze the image to determine severity and risks!</small>
+                    </div>
+
+                    <button type="submit" id="submit-btn">
+                        <span class="btn-text">Analyze with AI</span>
+                        <div class="spinner" id="spinner"></div>
+                    </button>
+                </form>
+            </div>
+
+            <div class="card results-container hidden" id="results-container">
+                <h2>AI Analysis Results</h2>
+                
+                <div class="result-grid">
+                    <div class="result-box severity-box">
+                        <h3>Severity Level</h3>
+                        <div class="severity-badge" id="severity-badge">High</div>
+                    </div>
+                    <div class="result-box cost-box">
+                        <h3>Est. Repair Cost</h3>
+                        <div class="cost-value" id="cost-value">₹0</div>
+                    </div>
+                </div>
+
+                <div class="result-section">
+                    <h3>⚠️ Safety Risks Identified</h3>
+                    <ul id="risks-list" class="risks-list">
+                        <!-- Populated by JS -->
+                    </ul>
+                </div>
+
+                <div class="result-section">
+                    <div class="letter-header">
+                        <h3>📄 Official Complaint Letter</h3>
+                        <button id="copy-btn" class="secondary-btn">Copy to Clipboard</button>
+                    </div>
+                    <div class="letter-content" id="letter-content">
+                        <!-- Populated by JS -->
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
